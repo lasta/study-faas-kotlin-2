@@ -2,9 +2,9 @@
 [1 is here](https://github.com/lasta/study-faas-kotlin).
 
 ## TODO
-- [ ] migrate from `build.gradle` to `build.gradle.kts`
+- [x] migrate from `build.gradle` to `build.gradle.kts`
 - [ ] run "Hello, World!"
-  - [ ] on mac
+  - [x] on mac
   - [ ] on Amazon Linux 2
 - [ ] cross-compile for platforms at once
   - [sample][example to build at once]
@@ -35,8 +35,6 @@
 
 ## TL;DR
 ### build
-<!-- FIXME: described below is for study-faas-kotlin (1). 
-            should be adapted for 2.
 ```sh
 ./gradlew build
 ```
@@ -47,15 +45,24 @@ Initially, it may take several minutes.
 #### on Mac
 ```console
 $ ./build/bin/macosX64/entrypoint.sample1ReleaseExecutable/entrypoint.sample1.kexe
+```
+```sh:output
 Hello, Kotlin/Native!
 ```
 
-### on Linux
-```console
-$ ./build/bin/linuxX64/entrypoint.sample1ReleaseExecutable/entrypoint.sample1.kexe
+### on Linux (AmazonLinux 2 with Docker for mac)
+```console:on_host
+docker pull amazonlinux:latest
+docker run -itd amazonlinux:latest /bin/bash
+docker cp build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}'):/root/study-faas-kotlin-2.kexe
+docker exec -it $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}') /root/study-faas-kotlin-2.kexe
+```
+```sh:output
 Hello, Kotlin/Native!
 ```
 
+<!-- FIXME: described below is for study-faas-kotlin (1). 
+            should be adapted for 2.
 ### Test
 #### on Mac
 ```console
