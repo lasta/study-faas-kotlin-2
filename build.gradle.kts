@@ -25,7 +25,9 @@ kotlin {
         }
     }
     sourceSets {
+        @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeMain by getting
+        @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeTest by getting
     }
 }
