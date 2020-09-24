@@ -47,13 +47,9 @@ Initially, it may take several minutes.
 ./build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe
 # Hello, Kotlin/Native!
 ```
-```sh:output
-Hello, Kotlin/Native!
-```
 
-### on Linux (AmazonLinux 2 with Docker for mac)
+### on Linux (AmazonLinux 2 on Docker for mac)
 ```sh
-# on host
 docker pull amazonlinux:latest
 docker run -itd amazonlinux:latest /bin/bash
 docker cp build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}'):/root/study-faas-kotlin-2.kexe
