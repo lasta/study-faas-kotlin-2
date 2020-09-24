@@ -3,9 +3,9 @@
 
 ## TODO
 - [x] migrate from `build.gradle` to `build.gradle.kts`
-- [ ] run "Hello, World!"
+- [x] run "Hello, World!"
   - [x] on mac
-  - [ ] on Amazon Linux 2
+  - [x] on Amazon Linux 2
 - [ ] cross-compile for platforms at once
   - [sample][example to build at once]
 - [ ] mark project structure automatically by IntelliJ IDEA
@@ -43,22 +43,22 @@ Initially, it may take several minutes.
 
 ### Run
 #### on Mac
-```console
-$ ./build/bin/macosX64/entrypoint.sample1ReleaseExecutable/entrypoint.sample1.kexe
+```sh
+./build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe
+# Hello, Kotlin/Native!
 ```
 ```sh:output
 Hello, Kotlin/Native!
 ```
 
 ### on Linux (AmazonLinux 2 with Docker for mac)
-```console:on_host
+```sh
+# on host
 docker pull amazonlinux:latest
 docker run -itd amazonlinux:latest /bin/bash
 docker cp build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}'):/root/study-faas-kotlin-2.kexe
 docker exec -it $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}') /root/study-faas-kotlin-2.kexe
-```
-```sh:output
-Hello, Kotlin/Native!
+# Hello, Kotlin/Native!
 ```
 
 <!-- FIXME: described below is for study-faas-kotlin (1). 
