@@ -6,8 +6,9 @@
 - [x] run "Hello, World!"
   - [x] on mac
   - [x] on Amazon Linux 2
-- [ ] cross-compile for platforms at once
-  - [sample][example to build at once]
+- [ ] cross-compile for platforms
+  - [x] depends on host
+  - [ ] [at once][example to build at once]
 - [ ] mark project structure automatically by IntelliJ IDEA
 - [ ] clean up `build.gradle.kts`
   - [ ] create `buildSrc`
