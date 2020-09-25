@@ -8,10 +8,13 @@
   - [x] on Amazon Linux 2
 - [ ] cross-compile for platforms
   - [x] depends on host
-  - [ ] [at once][example to build at once]
+  - [ ] at once
+    - [sample][example to build at once]
 - [x] mark project structure automatically by IntelliJ IDEA
 - [ ] clean up `build.gradle.kts`
-  - [ ] create `buildSrc`
+  - [x] create `buildSrc`
+    - [sample][create buildSrc]
+  - [ ] unit-test in buildSrc scripts
   - [ ] generate "executables" automatically
 - [ ] arrange source directory structure
 - [ ] import JSON serializer
@@ -32,6 +35,7 @@
 - [ ] O/R mapper
 
 [example to build at once]: https://github.com/JetBrains/kotlin/blob/1.3.20/libraries/tools/kotlin-gradle-plugin-integration-tests/src/test/resources/testProject/new-mpp-native-binaries/kotlin-dsl/build.gradle.kts
+[create buildSrc]: https://www.itcowork.co.jp/blog/?p=5357
 [preacher]: https://github.com/ymoch/preacher
 
 ## TL;DR

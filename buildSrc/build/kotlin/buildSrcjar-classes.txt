@@ -1,0 +1,1 @@
+/Users/lasta/repos/github.com/lasta/study-faas-kotlin-2/buildSrc/build/classes/kotlin/main/dependencies/Dependencies.class:/Users/lasta/repos/github.com/lasta/study-faas-kotlin-2/buildSrc/build/classes/kotlin/main/entrypoint/EntryPoint.class:/Users/lasta/repos/github.com/lasta/study-faas-kotlin-2/buildSrc/build/classes/kotlin/main/entrypoint/EntryPointKt.class

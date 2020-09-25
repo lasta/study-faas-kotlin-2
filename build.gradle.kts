@@ -18,19 +18,12 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
-    // TODO: extract to buildSrc
-    val entryPointPackages = listOf(
-        "",
-        "me.lasta.studyfaaskotlin2.entrypoint"
-    )
-
     nativeTarget.apply {
         binaries {
-            entryPointPackages.forEach { entryPointPackage ->
-                executable(entryPointPackage) {
-                    this.entryPoint = "$entryPointPackage.main"
-                    // pass args
-//                    runTask?.args(entryPoint.args)
+            entrypoint.ENTRY_POINTS.forEach { entryPoint ->
+                executable(entryPoint.packageName) {
+                    this.entryPoint = entryPoint.functionName
+                    runTask?.args(entryPoint.args)
                 }
             }
         }
