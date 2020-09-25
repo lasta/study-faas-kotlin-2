@@ -9,7 +9,7 @@
 - [ ] cross-compile for platforms
   - [x] depends on host
   - [ ] [at once][example to build at once]
-- [ ] mark project structure automatically by IntelliJ IDEA
+- [x] mark project structure automatically by IntelliJ IDEA
 - [ ] clean up `build.gradle.kts`
   - [ ] create `buildSrc`
   - [ ] generate "executables" automatically

@@ -18,10 +18,20 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
+    // TODO: extract to buildSrc
+    val entryPointPackages = listOf(
+        "",
+        "me.lasta.studyfaaskotlin2.entrypoint"
+    )
+
     nativeTarget.apply {
         binaries {
-            executable {
-                entryPoint = "main"
+            entryPointPackages.forEach { entryPointPackage ->
+                executable(entryPointPackage) {
+                    this.entryPoint = "$entryPointPackage.main"
+                    // pass args
+//                    runTask?.args(entryPoint.args)
+                }
             }
         }
     }
@@ -31,5 +41,12 @@ kotlin {
         val nativeMain by getting
         @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeTest by getting
+    }
+}
+
+tasks {
+    wrapper {
+        gradleVersion = "6.6"
+        distributionType = Wrapper.DistributionType.ALL
     }
 }
