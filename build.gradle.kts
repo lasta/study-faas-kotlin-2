@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.4.0"
+    kotlin("multiplatform") version "1.4.10"
 }
 group = "me.lasta"
 version = "1.0-SNAPSHOT"
