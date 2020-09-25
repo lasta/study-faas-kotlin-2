@@ -8,6 +8,7 @@ repositories {
     mavenCentral()
 }
 kotlin {
+
     // TODO: cross-compile for platforms at once
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
@@ -19,6 +20,7 @@ kotlin {
     }
 
     nativeTarget.apply {
+        compilations.all { kotlinOptions.verbose = true}
         binaries {
             entrypoint.ENTRY_POINTS.forEach { entryPoint ->
                 executable(entryPoint.packageName) {
@@ -39,7 +41,7 @@ kotlin {
 
 tasks {
     wrapper {
-        gradleVersion = "6.6"
+        gradleVersion = "6.6.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
