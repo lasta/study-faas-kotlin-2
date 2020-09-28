@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
 }
 group = "me.lasta"
 version = "1.0-SNAPSHOT"
@@ -19,12 +20,15 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
+
     nativeTarget.apply {
-        compilations.all { kotlinOptions.verbose = true}
+        compilations.all {
+            kotlinOptions.verbose = true
+        }
         binaries {
             entrypoint.ENTRY_POINTS.forEach { entryPoint ->
                 executable(entryPoint.packageName) {
-                    this.entryPoint = entryPoint.functionName
+                    this.entryPoint = entryPoint.entryFunction
                     runTask?.args(entryPoint.args)
                 }
             }
@@ -34,6 +38,7 @@ kotlin {
     sourceSets {
         @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeMain by getting
+
         @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeTest by getting
     }
