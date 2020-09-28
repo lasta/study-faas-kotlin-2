@@ -11,22 +11,24 @@
   - [ ] at once
     - [sample][example to build at once]
 - [x] mark project structure automatically by IntelliJ IDEA
-- [ ] clean up `build.gradle.kts`
+- [x] clean up `build.gradle.kts`
   - [x] create `buildSrc`
     - [sample][create buildSrc]
   - [ ] unit-test in buildSrc scripts
   - [ ] generate "executables" automatically
-- [ ] arrange source directory structure
-- [ ] import JSON serializer
-  - [ ] use stringify
-  - [ ] use deserializer
+- [x] arrange source directory structure
+- [x] import JSON serializer
+  - [x] use stringify
+    - [`Json.encodeToSting`][kotlinx.serialization]
+  - [x] use deserializer
+    - [`Json.decodeFromString<Clazz>(string)`][kotlinx.serialization]
 - [ ] import ktor
   - [ ] use HTTP Client
 - [ ] import DI library
   - kodein?
 - [ ] on IntelliJ IDEA
-  - [ ] run
-  - [ ] debug
+  - [x] run
+  - [x] debug
   - [ ] unit test
   - [ ] sam local (AWS Serverless Application Model)
 - [ ] deploy
@@ -37,7 +39,7 @@
 [example to build at once]: https://github.com/JetBrains/kotlin/blob/1.3.20/libraries/tools/kotlin-gradle-plugin-integration-tests/src/test/resources/testProject/new-mpp-native-binaries/kotlin-dsl/build.gradle.kts
 [create buildSrc]: https://www.itcowork.co.jp/blog/?p=5357
 [preacher]: https://github.com/ymoch/preacher
-
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization#introduction-and-references
 ## TL;DR
 ### build
 ```sh
