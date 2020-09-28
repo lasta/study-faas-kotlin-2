@@ -29,5 +29,6 @@ val ENTRY_POINTS: List<EntryPoint> = listOf(
     EntryPoint(packageName = ""),
     EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint"),
     EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.hello"),
-    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.serialization")
+    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.serialization"),
+    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.httpclient")
 )

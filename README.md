@@ -22,8 +22,9 @@
     - [`Json.encodeToSting`][kotlinx.serialization]
   - [x] use deserializer
     - [`Json.decodeFromString<Clazz>(string)`][kotlinx.serialization]
-- [ ] import ktor
-  - [ ] use HTTP Client
+- [x] import ktor
+  - [x] use HTTP Client
+    - [`ktor-client-cio`][ktor-client-cio]
 - [ ] import DI library
   - kodein?
 - [ ] on IntelliJ IDEA
@@ -40,6 +41,8 @@
 [create buildSrc]: https://www.itcowork.co.jp/blog/?p=5357
 [preacher]: https://github.com/ymoch/preacher
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization#introduction-and-references
+[ktor-client-cio]: https://github.com/ktorio/ktor/blob/master/ktor-client/ktor-client-cio/build.gradle.kts
+
 ## TL;DR
 ### build
 ```sh
