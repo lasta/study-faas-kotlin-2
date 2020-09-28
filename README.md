@@ -60,11 +60,14 @@ Initially, it may take several minutes.
 
 ### on Linux (AmazonLinux 2 on Docker for mac)
 ```sh
-docker pull amazonlinux:latest
-docker run -itd amazonlinux:latest /bin/bash
-docker cp build/bin/native/releaseExecutable/study-faas-kotlin-2.kexe $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}'):/root/study-faas-kotlin-2.kexe
-docker exec -it $(docker ps | grep 'amazonlinux:latest' | awk '{print $1}') /root/study-faas-kotlin-2.kexe
-# Hello, Kotlin/Native!
+docker pull gradle:latest
+docker run -itd docker.io/library/gradle:latest /bin/bash
+docker cp ./ $(docker ps | grep 'gradle:latest' | awk '{print $1}'):/home/gradle/faas
+docker exec -it $(docker ps | grep 'gradle:latest' | awk '{print $1}') /bin/bash
+# on container
+cd faas
+./gradlew clean build
+for f in $(find build -name '*.kexe' | grep -v 'dSYM' | grep -vi 'Debug' ); do ./$f ;done
 ```
 
 <!-- FIXME: described below is for study-faas-kotlin (1). 

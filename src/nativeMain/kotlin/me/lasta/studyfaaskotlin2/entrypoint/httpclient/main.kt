@@ -9,7 +9,7 @@ import io.ktor.utils.io.core.*
 import kotlinx.coroutines.runBlocking
 
 @KtorExperimentalAPI
-fun main() {
+fun main() = runBlocking {
     HttpClient(CIO) {
         install(HttpTimeout) {
         }
@@ -17,11 +17,8 @@ fun main() {
             agent = "some user agent"
         }
     }.use { client ->
-        runBlocking {
-            val message: String = client.get("http://example.com")
-            println("Hello, Ktor CIO client")
-            println(message)
-        }
+        val message: String = client.get("http://example.com")
+        println("Hello, Ktor CIO client")
+        println(message)
     }
 }
-
