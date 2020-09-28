@@ -7,7 +7,9 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
+
 kotlin {
 
     // TODO: cross-compile for platforms at once

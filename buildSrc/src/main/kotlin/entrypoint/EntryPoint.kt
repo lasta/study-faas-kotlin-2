@@ -27,5 +27,7 @@ data class EntryPoint(
 val ENTRY_POINTS: List<EntryPoint> = listOf(
     // TODO: generate automatically with project structure
     EntryPoint(packageName = ""),
-    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint")
+    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint"),
+    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.hello"),
+    EntryPoint(packageName = "me.lasta.studyfaaskotlin2.entrypoint.serialization")
 )
