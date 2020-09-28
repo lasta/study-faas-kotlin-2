@@ -39,7 +39,11 @@ kotlin {
 
     sourceSets {
         @kotlin.Suppress("UNUSED_VARIABLE")
-        val nativeMain by getting
+        val nativeMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+            }
+        }
 
         @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeTest by getting
