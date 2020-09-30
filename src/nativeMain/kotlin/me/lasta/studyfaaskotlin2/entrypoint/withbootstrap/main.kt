@@ -29,10 +29,10 @@ fun main() = runBlocking {
             lambdaEnv = LambdaCustomRuntime.initialize()
 
             // business logic
-            val userArticles: List<UserArticle> = HttpClient(CIO).use { client ->
+            val userArticle: String = HttpClient(CIO).use { client ->
                 try {
                     // https://jsonplaceholder.typicode.com/
-                    client.get("https://jsonplaceholder.typicode.com/posts")
+                    client.get("http://jsonplaceholder.typicode.com/posts/1")
                 } catch (e: Exception) {
                     // Application error each request
                     println("Application Error")
@@ -42,7 +42,7 @@ fun main() = runBlocking {
                 }
             } ?: continue
             // postprocessing each request
-            LambdaCustomRuntime.sendResponse(lambdaEnv, userArticles)
+            LambdaCustomRuntime.sendResponse(lambdaEnv, userArticle)
         }
     } catch (e: Exception) {
         // Initialization error
@@ -68,7 +68,7 @@ object LambdaCustomRuntime {
         try {
             LambdaCustomRuntimeEnv(client.get("http://$lambdaRuntimeApi/2018-06-01/runtime/invocation/next"))
         } catch (e: Exception) {
-            TODO("do something")
+            TODO("do something from initialize")
         }
     }
 
@@ -86,7 +86,7 @@ object LambdaCustomRuntime {
                     )
                 }
             } catch (e: Exception) {
-                TODO("do something")
+                TODO("do something from send invocation error")
             }
 
             println(proc.toString())
@@ -107,7 +107,7 @@ object LambdaCustomRuntime {
                     )
                 }
             } catch (e: Exception) {
-                TODO("do something")
+                TODO("do something from send initialize error")
             }
 
             println(proc.toString())
@@ -115,25 +115,27 @@ object LambdaCustomRuntime {
     }
 
     @KtorExperimentalAPI
-    suspend inline fun <reified T> sendResponse(lambdaEnv: LambdaCustomRuntimeEnv, response: T) {
+    suspend inline fun sendResponse(lambdaEnv: LambdaCustomRuntimeEnv, response: String) {
         HttpClient(CIO).use { client ->
             val proc: HttpResponse = try {
                 client.post {
                     url("http://$lambdaRuntimeApi/2018-06-01/runtime/invocation/${lambdaEnv.requestId}/response")
-                    body = Json.encodeToString(
-                        mapOf(
-                            "statusCode" to 200,
-                            "body" to Json.encodeToString(response)
-                        )
-                    )
+                    body = Json.encodeToString(ResponseMessage(body = response))
                 }
             } catch (e: Exception) {
-                TODO("do something")
+                e.printStackTrace()
+                TODO("do something from send response")
             }
             println(proc.toString())
         }
     }
 }
+
+@Serializable
+data class ResponseMessage(
+    val statusCode: Int = 200,
+    val body: String
+)
 
 class LambdaCustomRuntimeEnv(
     private val response: HttpResponse
