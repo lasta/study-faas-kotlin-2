@@ -15,15 +15,7 @@ repositories {
 
 kotlin {
 
-    // TODO: cross-compile for platforms at once
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-//    val nativeTarget = when {
-//        hostOs == "Mac OS X" -> macosX64("native")
-//        hostOs == "Linux" -> linuxX64("native")
-//        isMingwX64 -> mingwX64("native")
-//        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-//    }
+    // The AWS Lambda runtime is on Amazon Linux/2
     val nativeTarget = linuxX64("native")
 
     nativeTarget.apply {
@@ -31,18 +23,22 @@ kotlin {
             kotlinOptions.verbose = true
         }
         binaries {
-            entrypoint.ENTRY_POINTS.forEach { entryPoint ->
-                executable(entryPoint.packageName) {
-                    this.entryPoint = entryPoint.entryFunction
-                    runTask?.args(entryPoint.args)
-                }
+//            entrypoint.ENTRY_POINTS.forEach { entryPoint ->
+//                executable(entryPoint.packageName) {
+//                    this.entryPoint = entryPoint.entryFunction
+//                    runTask?.args(entryPoint.args)
+//                }
+//            }
+            executable("me.lasta.studyfaaskotlin2.entrypoint.withbootstrap") {
+                baseName = "bootstrap"
+                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.withbootstrap.main"
             }
         }
     }
 
     sourceSets {
         // TODO: define in buildSrc
-        val ktor_version = "1.4.0"
+        val ktor_version = "1.4.1"
 
         @kotlin.Suppress("UNUSED_VARIABLE")
         val nativeMain by getting {
@@ -68,4 +64,15 @@ tasks {
         gradleVersion = "6.6.1"
         distributionType = Wrapper.DistributionType.ALL
     }
+
+}
+
+tasks.register<Copy>("putBootstrapForSAMLocal") {
+    from(file("$buildDir/bin/native/me.lasta.studyfaaskotlin2.entrypoint.withbootstrapReleaseExecutable/bootstrap.kexe"))
+    into(file("sam/bootstrap"))
+}
+
+tasks.register<Exec>("startSAMLocal") {
+    task("putBootstrapForSAMLocal")
+    commandLine("sam", "local", "start-api", "-t", "sam/template.yaml")
 }
