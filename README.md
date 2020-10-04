@@ -14,6 +14,7 @@
   - [ ] unit-test in buildSrc scripts
   - [ ] generate "executables" automatically
 - [ ] arrange source directory structure
+  - do refactor `me/lasta/studyfaaskotlin2/entrypoint/withbootstrap/main.kt`
 - [x] import JSON serializer
   - [x] use stringify
     - [`Json.encodeToSting`][kotlinx.serialization]
@@ -23,6 +24,7 @@
   - [x] use HTTP Client
     - [`ktor-client-cio`][ktor-client-cio]
   - [ ] https
+    - use `Curl` client instead?
 - [ ] import DI library
   - kodein?
 - [ ] on IntelliJ IDEA
