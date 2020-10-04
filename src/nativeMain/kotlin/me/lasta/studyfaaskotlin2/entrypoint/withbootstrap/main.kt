@@ -1,7 +1,7 @@
 package me.lasta.studyfaaskotlin2.entrypoint.withbootstrap
 
 import io.ktor.client.*
-import io.ktor.client.engine.cio.*
+import io.ktor.client.engine.curl.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
@@ -29,10 +29,10 @@ fun main() = runBlocking {
             lambdaEnv = LambdaCustomRuntime.initialize()
 
             // business logic
-            val userArticle: String = HttpClient(CIO).use { client ->
+            val userArticle: String = HttpClient(Curl).use { client ->
                 try {
                     // https://jsonplaceholder.typicode.com/
-                    client.get("http://jsonplaceholder.typicode.com/posts/1")
+                    client.get("https://jsonplaceholder.typicode.com/posts/1")
                 } catch (e: Exception) {
                     // Application error each request
                     println("Application Error")
@@ -64,7 +64,7 @@ object LambdaCustomRuntime {
     val lambdaRuntimeApi = requireNotNull(getenv("AWS_LAMBDA_RUNTIME_API")).toKString()
 
     @KtorExperimentalAPI
-    suspend fun initialize(): LambdaCustomRuntimeEnv = HttpClient(CIO).use { client ->
+    suspend fun initialize(): LambdaCustomRuntimeEnv = HttpClient(Curl).use { client ->
         try {
             LambdaCustomRuntimeEnv(client.get("http://$lambdaRuntimeApi/2018-06-01/runtime/invocation/next"))
         } catch (e: Exception) {
@@ -74,7 +74,7 @@ object LambdaCustomRuntime {
 
     @KtorExperimentalAPI
     suspend fun sendInvocationError(lambdaEnv: LambdaCustomRuntimeEnv, error: Exception) {
-        HttpClient(CIO).use { client ->
+        HttpClient(Curl).use { client ->
             val proc: HttpResponse = try {
                 client.post {
                     url("http://$lambdaRuntimeApi/2018-06-01/runtime/invocation/${lambdaEnv.requestId}/error")
@@ -95,7 +95,7 @@ object LambdaCustomRuntime {
 
     @KtorExperimentalAPI
     suspend fun sendInitializeError(lambdaEnv: LambdaCustomRuntimeEnv, error: Exception) {
-        HttpClient(CIO).use { client ->
+        HttpClient(Curl).use { client ->
             val proc: HttpResponse = try {
                 client.post {
                     url("http://$lambdaRuntimeApi/2018-06-01/runtime/init/error")
@@ -116,7 +116,7 @@ object LambdaCustomRuntime {
 
     @KtorExperimentalAPI
     suspend inline fun sendResponse(lambdaEnv: LambdaCustomRuntimeEnv, response: String) {
-        HttpClient(CIO).use { client ->
+        HttpClient(Curl).use { client ->
             val proc: HttpResponse = try {
                 client.post {
                     url("http://$lambdaRuntimeApi/2018-06-01/runtime/invocation/${lambdaEnv.requestId}/response")
