@@ -16,7 +16,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: handler
-      Runtime: provided
+      Runtime: provided.al2
       Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
       Events:
         CatchAll:
