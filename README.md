@@ -45,31 +45,26 @@
 [preacher]: https://github.com/ymoch/preacher
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization#introduction-and-references
 
-## Setup
-### [Installing the AWS SAM CLI][Installing the AWS SAM CLI]
+## Run on the AWS SAM Local CLI
+### Setup
 1. Install [Homebrew][Homebrew]
 2. Install AWS CLI2
 ```sh
 brew tap aws/tap
 brew install aws-sam-cli
 ```
-3. Build image to build gradle environment on Amazon Linux 2
+
+### Create build environment
+1. Clone this repository and change directory there
+2. Build image to build gradle environment on Amazon Linux 2
 ```sh
 docker build -t gradle-on-amazonlinux2:1.0 .
 ```
-4. Build 
+
+### Build
 ```sh
-# at repository root
 docker run --memory=3g -v "$(pwd)":/root/faas -t gradle-on-amazonlinux2:1.0 /root/faas/gradlew -p /root/faas/ clean build
 cp build/bin/native/me.lasta.studyfaaskotlin2.entrypoint.withbootstrapReleaseExecutable/bootstrap.kexe sam/bootstrap
-```
-5. Run SAM local api
-```sh
-sam local start-api -t sam/template.yaml
-```
-6. Run
-```shell script
-curl http://localhost:3000/withbootstrap
 ```
 
 #### Note. OOME
@@ -78,6 +73,16 @@ If compiler raises 137 error, it may occur OOME.
 If it occurs, you should configure memory size.
 
 ![change memory size from 2G to 3G]( ./doc/assets/allocate-more-memory.png )
+
+### Run
+1. Run SAM local api
+```sh
+sam local start-api -t sam/template.yaml
+```
+2. Request
+```shell script
+curl http://localhost:3000/withbootstrap
+```
 
 #### Note. Install manually
 ```sh
