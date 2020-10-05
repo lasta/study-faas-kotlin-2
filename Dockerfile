@@ -6,6 +6,6 @@ RUN yum clean metadata
 RUN yum -y install java-1.8.0-amazon-corretto-devel
 RUN yum -y install install which zip unzip
 RUN curl -s http://get.sdkman.io | bash && \
-    sh /root/.sdkman/bin/sdkman-init.sh && \
-    source /root/.bashrc && \
+    bash ${HOME}/.sdkman/bin/sdkman-init.sh && \
+    source ${HOME}/.bashrc && \
     sdk install gradle
