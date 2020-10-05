@@ -64,7 +64,15 @@ docker build -t gradle-on-amazonlinux2:1.0 .
 ### Build
 ```sh
 docker run --memory=3g -v "$(pwd)":/root/faas -t gradle-on-amazonlinux2:1.0 /root/faas/gradlew -p /root/faas/ clean build
-cp build/bin/native/me.lasta.studyfaaskotlin2.entrypoint.withbootstrapReleaseExecutable/bootstrap.kexe sam/bootstrap
+cp build/bin/native/helloReleaseExecutable/main.kexe sam/bootstrap
+```
+
+#### Note. Development continuously
+```shell script
+docker run --memory=3g -v "$(pwd)":/root/faas -itd gradle-on-amazonlinux2:1.0
+docker exec -it $(docker ps | grep 'gradle-on-amazonlinux' | awk '{print $1}') /root/faas/gradlew -p /root/faas/ clean build
+# TODO: fix path
+cp build/bin/native/helloReleaseExecutable/main.kexe sam/bootstrap
 ```
 
 #### Note. OOME

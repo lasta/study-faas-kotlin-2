@@ -27,9 +27,9 @@ kotlin {
             kotlinOptions.verbose = true
         }
         binaries {
-            executable("me.lasta.studyfaaskotlin2.entrypoint.withbootstrap") {
-                baseName = "bootstrap"
-                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.withbootstrap.main"
+            executable("hello") {
+                baseName = "main"
+                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
             }
             // FIXME: Detect entry points automatically
 //            entrypoint.ENTRY_POINTS.forEach { entryPoint ->
