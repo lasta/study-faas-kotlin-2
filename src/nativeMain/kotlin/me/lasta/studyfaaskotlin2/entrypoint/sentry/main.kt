@@ -13,13 +13,23 @@ fun main() {
     sentry_options_set_dsn(options, requireNotNull(getenv("SENTRY_DSN")).toKString())
 
     /* do something */
+    println("""
     sentry_capture_event(
         sentry_value_new_message_event(
-            SENTRY_LEVEL_INFO, // level
-            "custom", // logger
+            SENTRY_LEVEL_WARNING, // level
+            "custom-from-kotlin-native", // logger
             "It works from Kotlin/Native!" // message
         )
     )
+    """.trimIndent())
+    sentry_capture_event(
+        sentry_value_new_message_event(
+            SENTRY_LEVEL_WARNING, // level
+            "custom-from-kotlin-native", // logger
+            "It works from Kotlin/Native!" // message
+        )
+    )
+    println("done!!")
 
     // make sure everything flushes
     sentry_shutdown()
