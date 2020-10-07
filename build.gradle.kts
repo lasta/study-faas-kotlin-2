@@ -26,10 +26,24 @@ kotlin {
         compilations.all {
             kotlinOptions.verbose = true
         }
+        compilations.getByName("main") {
+            val libsentry by cinterops.creating {
+                defFile = File(projectDir, "src/nativeMain/interop/libsentry.def")
+                includeDirs("/root/sentry/build/include")
+                linkerOpts(
+                    "-L/root/sentry/build/build",
+                    "-L/usr/local/lib64"
+                )
+            }
+        }
         binaries {
-            executable("hello") {
+//            executable("hello") {
+//                baseName = "main"
+//                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
+//            }
+            executable("sentry-test") {
                 baseName = "main"
-                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
+                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry"
             }
             // FIXME: Detect entry points automatically
 //            entrypoint.ENTRY_POINTS.forEach { entryPoint ->

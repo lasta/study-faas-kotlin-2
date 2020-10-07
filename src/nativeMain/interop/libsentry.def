@@ -1,0 +1,4 @@
+headers = sentry.h
+headerFilter = *
+linkerOpts.linux = -L/root/sentry/build/build -L/usr/lib64 -L/usr/local/lib64 -l sentry
+compilerOpts.linux = -I/root/sentry/build/include
