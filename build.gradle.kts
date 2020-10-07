@@ -43,7 +43,7 @@ kotlin {
 //            }
             executable("sentry-test") {
                 baseName = "main"
-                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry"
+                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry.main"
             }
             // FIXME: Detect entry points automatically
 //            entrypoint.ENTRY_POINTS.forEach { entryPoint ->
