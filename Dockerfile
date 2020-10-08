@@ -25,7 +25,7 @@ RUN mkdir -p /root/sentry && cd /root/sentry/ && \
     cmake -B build && \
     cmake --build build -j8
 RUN mkdir -p /usr/local/lib64 && cd /usr/local/lib64 && \
-    ln -s /root/sentry/build/install/lib64/libsentry.so && \
+    ln -s /root/sentry/build/build/libsentry.so && \
     echo "/usr/local/lib64" > /etc/ld.so.conf.d/usr-local-lib.conf
 RUN echo "/root/sentry/build/build" > /etc/ld.so.conf.d/sentry.conf && ldconfig
 
