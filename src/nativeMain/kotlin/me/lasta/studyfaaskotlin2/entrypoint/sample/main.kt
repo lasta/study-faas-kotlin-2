@@ -14,12 +14,14 @@ import kotlinx.serialization.json.Json
 import me.lasta.studyfaaskotlin2.awslambda.LambdaCustomRuntime
 import me.lasta.studyfaaskotlin2.awslambda.LambdaCustomRuntimeEnv
 import me.lasta.studyfaaskotlin2.entity.UserArticle
+import me.lasta.studyfaaskotlin2.monitor.Sentry
 import platform.posix.getenv
 
 private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
 
 @KtorExperimentalAPI
 fun main() {
+    Sentry.init()
     runBlocking {
         println("Hello main2") // debug
         val lambdaRuntimeApi = requireNotNull(getenv("AWS_LAMBDA_RUNTIME_API")).toKString()
@@ -51,6 +53,7 @@ fun main() {
                 println(userArticle)
                 println(Json.encodeToString(userArticle))
                 lambdaCustomRuntime.sendResponse(lambdaEnv, userArticle)
+                Sentry.reportInfo("Succeeded to send response")
             }
         } catch (e: Exception) {
             // Initialization Error
@@ -59,4 +62,5 @@ fun main() {
             lambdaCustomRuntime.sendInitializeError(lambdaEnv, e)
         }
     }
+    Sentry.close()
 }

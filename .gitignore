@@ -1,3 +1,6 @@
 # artifacts for buildSrc
 buildSrc/build/
 bootstrap
+.aws-sam/
+.sentry-native/
+*.so

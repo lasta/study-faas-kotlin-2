@@ -26,7 +26,19 @@ Resources:
             Method: GET
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
+          SENTRY_DSN: 'TODO' # TODO: get DSN from https://sentry.io/settings/melasta/projects/melasta/keys/
           PARAM1: VALUE
+      Layers:
+        - !Ref LayerSentry
+  LayerSentry:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      Description: Layer of libsentry.so
+      ContentUri: 'sentry/'
+      CompatibleRuntimes:
+        - provided.al2
+    Metadata:
+      BuildMethod: makefile
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
