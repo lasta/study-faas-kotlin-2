@@ -52,8 +52,9 @@ fun main() {
                 } ?: continue
                 println(userArticle)
                 println(Json.encodeToString(userArticle))
-                lambdaCustomRuntime.sendResponse(lambdaEnv, userArticle)
                 Sentry.reportInfo("Succeeded to send response")
+                println("Sent report to sentry")
+                lambdaCustomRuntime.sendResponse(lambdaEnv, userArticle)
             }
         } catch (e: Exception) {
             // Initialization Error

@@ -35,6 +35,7 @@
   - ~~sam local (AWS Serverless Application Model)~~
     - runtime "provided" is unsupported
 - [x] sam local (AWS Serverless Application Model)
+- [ ] create bootstrap klib and lambda layer to reduce compile time
 - [ ] deploy
 - [ ] create API test
   - [ ] [preacher][preacher]
