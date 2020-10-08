@@ -11,9 +11,11 @@ import platform.posix.getenv
 fun main() {
     val options: CPointer<sentry_options_t> = requireNotNull(sentry_options_new())
     sentry_options_set_dsn(options, requireNotNull(getenv("SENTRY_DSN")).toKString())
+    sentry_init(options)
 
     /* do something */
-    println("""
+    println(
+        """
     sentry_capture_event(
         sentry_value_new_message_event(
             SENTRY_LEVEL_WARNING, // level
@@ -21,7 +23,8 @@ fun main() {
             "It works from Kotlin/Native!" // message
         )
     )
-    """.trimIndent())
+    """.trimIndent()
+    )
     sentry_capture_event(
         sentry_value_new_message_event(
             SENTRY_LEVEL_WARNING, // level
