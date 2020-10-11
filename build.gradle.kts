@@ -37,10 +37,10 @@ kotlin {
                 baseName = "main"
                 entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
             }
-            executable("sentry-test") {
-                baseName = "main"
-                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry.main"
-            }
+//            executable("sentry-test") {
+//                baseName = "main"
+//                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry.main"
+//            }
 //            executable("sampleerror") {
 //                baseName = "main"
 //                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sampleerror"
