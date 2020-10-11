@@ -9,6 +9,7 @@ import io.ktor.util.*
 import io.ktor.utils.io.core.*
 import kotlinx.coroutines.runBlocking
 import me.lasta.studyfaaskotlin2.awslambda.LambdaCustomRuntime
+import me.lasta.studyfaaskotlin2.awslambda.LambdaCustomRuntimeEnv
 import me.lasta.studyfaaskotlin2.entity.UserArticle
 import me.lasta.studyfaaskotlin2.monitor.Sentry
 
@@ -18,12 +19,12 @@ private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
 fun main() {
     Sentry.init()
     runBlocking {
-        LambdaCustomRuntime().run(fetchUserArticle)
+        LambdaCustomRuntime().exec(fetchUserArticle)
     }
     Sentry.close()
 }
 
-val fetchUserArticle: (LambdaCustomRuntime) -> UserArticle = { _ ->
+val fetchUserArticle: (LambdaCustomRuntimeEnv) -> UserArticle = { _ ->
     runBlocking {
         HttpClient(Curl) {
             install(JsonFeature) {

@@ -31,14 +31,14 @@ class LambdaCustomRuntime {
         get() = "http://$lambdaRuntimeApi/2018-06-01/runtime"
 
     @KtorExperimentalAPI
-    suspend inline fun <reified T> run(block: (LambdaCustomRuntime) -> T) {
+    suspend inline fun <reified T> exec(block: (LambdaCustomRuntimeEnv) -> T) {
         lateinit var lambdaEnv: LambdaCustomRuntimeEnv
         try {
             while (true) {
                 lambdaEnv = initialize()
 
                 val response = try {
-                    block(this)
+                    block(lambdaEnv)
                 } catch (e: Exception) {
                     e.printStackTrace()
                     sendInvocationError(lambdaEnv, e)
