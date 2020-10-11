@@ -33,14 +33,14 @@ kotlin {
             }
         }
         binaries {
-            executable("hello") {
-                baseName = "main"
-                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
-            }
-//            executable("sentry-test") {
+//            executable("hello") {
 //                baseName = "main"
-//                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry.main"
+//                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sample.main"
 //            }
+            executable("sentry-test") {
+                baseName = "main"
+                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sentry.main"
+            }
 //            executable("sampleerror") {
 //                baseName = "main"
 //                entryPoint = "me.lasta.studyfaaskotlin2.entrypoint.sampleerror"

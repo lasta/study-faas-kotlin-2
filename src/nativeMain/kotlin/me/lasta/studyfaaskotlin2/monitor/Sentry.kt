@@ -23,7 +23,9 @@ object Sentry : Closeable {
     fun init() {
         val options = requireNotNull(sentry_options_new())
         sentry_options_set_dsn(options, requireNotNull(getenv("SENTRY_DSN")).toKString())
+        println("SENTRY_DSN: ${requireNotNull(getenv("SENTRY_DSN")).toKString()}") // debug
         sentry_init(options)
+        println("sentry has initialized.") // debug
     }
 
     fun reportInfo(message: String /* logger: Logger*/) {
@@ -34,10 +36,12 @@ object Sentry : Closeable {
                 message
             )
         )
+        println("sentry has reported information.") // debug
     }
 
     override fun close() {
         // make sure everything flushes
         sentry_shutdown()
+        println("sentry has shutdown.") // debug
     }
 }

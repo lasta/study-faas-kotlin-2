@@ -45,7 +45,6 @@ class LambdaCustomRuntime {
                     null
                 } ?: continue
 
-                Sentry.reportInfo("Succeeded to send response")
                 sendResponse(lambdaEnv, response)
             }
         } catch (e: Exception) {
