@@ -45,15 +45,10 @@ class LambdaCustomRuntime {
                     null
                 } ?: continue
 
-                println(response)
-                println(Json.encodeToString(response))
                 Sentry.reportInfo("Succeeded to send response")
-                println("Sent report to sentry")
                 sendResponse(lambdaEnv, response)
             }
         } catch (e: Exception) {
-            // Initialization Error
-            println("Initialization Error")
             e.printStackTrace()
             sendInitializeError(lambdaEnv, e)
         }

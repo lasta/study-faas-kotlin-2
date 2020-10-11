@@ -18,7 +18,6 @@ private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
 fun main() {
     Sentry.init()
     runBlocking {
-        println("Hello main") // debug
         LambdaCustomRuntime().run(fetchUserArticle)
     }
     Sentry.close()
