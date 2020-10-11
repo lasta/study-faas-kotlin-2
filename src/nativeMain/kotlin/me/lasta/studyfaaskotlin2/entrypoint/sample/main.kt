@@ -1,8 +1,15 @@
 package me.lasta.studyfaaskotlin2.entrypoint.sample
 
+import io.ktor.client.*
+import io.ktor.client.engine.curl.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.request.*
 import io.ktor.util.*
+import io.ktor.utils.io.core.*
 import kotlinx.coroutines.runBlocking
 import me.lasta.studyfaaskotlin2.awslambda.LambdaCustomRuntime
+import me.lasta.studyfaaskotlin2.entity.UserArticle
 import me.lasta.studyfaaskotlin2.monitor.Sentry
 
 private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
@@ -11,9 +18,21 @@ private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
 fun main() {
     Sentry.init()
     runBlocking {
-        println("Hello main2") // debug
-        val runtime = LambdaCustomRuntime()
-        runtime.run(URL)
+        println("Hello main") // debug
+        LambdaCustomRuntime().run(fetchUserArticle)
     }
     Sentry.close()
+}
+
+val fetchUserArticle: (LambdaCustomRuntime) -> UserArticle = { _ ->
+    runBlocking {
+        HttpClient(Curl) {
+            install(JsonFeature) {
+                serializer = KotlinxSerializer()
+            }
+        }.use { client ->
+            println("request: $URL")
+            client.get(URL)
+        }
+    }
 }

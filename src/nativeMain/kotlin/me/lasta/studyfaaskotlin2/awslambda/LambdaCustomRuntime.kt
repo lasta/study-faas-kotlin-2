@@ -13,7 +13,6 @@ import io.ktor.utils.io.core.*
 import kotlinx.cinterop.toKString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import me.lasta.studyfaaskotlin2.entity.UserArticle
 import me.lasta.studyfaaskotlin2.monitor.Sentry
 import platform.posix.getenv
 
@@ -32,32 +31,25 @@ class LambdaCustomRuntime {
         get() = "http://$lambdaRuntimeApi/2018-06-01/runtime"
 
     @KtorExperimentalAPI
-    suspend inline fun run(url: String) {
+    suspend inline fun <reified T> run(block: (LambdaCustomRuntime) -> T) {
         lateinit var lambdaEnv: LambdaCustomRuntimeEnv
         try {
             while (true) {
                 lambdaEnv = initialize()
 
-                // client must be initialize each to use
-                val userArticle: UserArticle = HttpClient(Curl) {
-                    install(JsonFeature) {
-                        serializer = KotlinxSerializer()
-                    }
-                }.use { client ->
-                    try {
-                        println("request: $url")
-                        client.get(url)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        sendInvocationError(lambdaEnv, e)
-                        null
-                    }
+                val response = try {
+                    block(this)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    sendInvocationError(lambdaEnv, e)
+                    null
                 } ?: continue
-                println(userArticle)
-                println(Json.encodeToString(userArticle))
+
+                println(response)
+                println(Json.encodeToString(response))
                 Sentry.reportInfo("Succeeded to send response")
                 println("Sent report to sentry")
-                sendResponse(lambdaEnv, userArticle)
+                sendResponse(lambdaEnv, response)
             }
         } catch (e: Exception) {
             // Initialization Error
