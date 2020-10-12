@@ -17,11 +17,12 @@ private const val URL = "https://jsonplaceholder.typicode.com/posts/1"
 
 @KtorExperimentalAPI
 fun main() {
-    Sentry.init()
-    runBlocking {
-        LambdaCustomRuntime().exec(fetchUserArticle)
+    Sentry().use { sentry ->
+        runBlocking {
+            LambdaCustomRuntime().exec(fetchUserArticle)
+        }
+        sentry.close()
     }
-    Sentry.close()
 }
 
 val fetchUserArticle: (LambdaCustomRuntimeEnv) -> UserArticle = { _ ->

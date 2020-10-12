@@ -18,7 +18,7 @@ RUN wget https://cmake.org/files/v3.18/cmake-3.18.3.tar.gz && tar xvzf cmake-3.1
 
 # sentry
 RUN mkdir -p /root/sentry && cd /root/sentry/ && \
-    wget https://github.com/getsentry/sentry-native/releases/download/0.4.2/sentry-native.zip && \
+    wget https://github.com/getsentry/sentry-native/releases/download/0.4.3/sentry-native.zip && \
     mkdir build && \
     unzip sentry-native.zip -d build && \
     cd build && \

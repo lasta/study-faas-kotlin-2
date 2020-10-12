@@ -109,9 +109,14 @@ source /root/.bashrc
 sdk install gradle
 ```
 
+
 * [Install Gradle on Amazon Linux][install gradle on amazon linux]
 
 [install gradle on amazon linux]: https://hacknote.jp/archives/16618/
+
+## future work
+* write document to use sentry-native on AWS Lambda on Qiita
+    * `/var/task/.sentry-native` is not writable by application
 
 <!-- FIXME: described below is for study-faas-kotlin (1). 
             should be adapted for 2.

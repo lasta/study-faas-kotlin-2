@@ -18,12 +18,14 @@ import platform.posix.getenv
  * </code>
  * This object might be class, not object.
  */
-object Sentry : Closeable {
+class Sentry : Closeable {
 
-    fun init() {
+    init {
         val options = requireNotNull(sentry_options_new())
         sentry_options_set_dsn(options, requireNotNull(getenv("SENTRY_DSN")).toKString())
-        println("SENTRY_DSN: ${requireNotNull(getenv("SENTRY_DSN")).toKString()}") // debug
+        sentry_options_set_debug(options, 1) // for debug
+        // sentry creates .sentry-native directory by default but /var/task/.sentry-native is not writable
+        sentry_options_set_database_path(options, "/tmp/sentry-native")
         sentry_init(options)
         println("sentry has initialized.") // debug
     }

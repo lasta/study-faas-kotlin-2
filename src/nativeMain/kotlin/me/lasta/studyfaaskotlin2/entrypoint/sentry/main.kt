@@ -1,16 +1,17 @@
 package me.lasta.studyfaaskotlin2.entrypoint.sentry
 
+import io.ktor.utils.io.core.*
 import me.lasta.studyfaaskotlin2.monitor.Sentry
 
 /**
  * Sample running with sentry
  */
 fun main() {
-    Sentry.init()
+    Sentry().use { sentry ->
 
-    /* do something */
-    println(
-        """
+        /* do something */
+        println(
+            """
     sentry_capture_event(
         sentry_value_new_message_event(
             SENTRY_LEVEL_WARNING, // level
@@ -19,11 +20,10 @@ fun main() {
         )
     )
     """.trimIndent()
-    )
-    Sentry.reportInfo(
-        "It works from Kotlin/Native!" // message
-    )
-    println("done!!")
-
-    Sentry.close()
+        )
+        sentry.reportInfo(
+            "It works from Kotlin/Native!!!!!!!!" // message
+        )
+        println("done!!")
+    }
 }
